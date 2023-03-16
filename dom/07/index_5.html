@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            display: table;
+            border-collapse: collapse;
+            box-sizing: border-box;
+            text-indent: initial;
+            border-spacing: 2px;
+            border-color: grey;
+        }
+
+        th {
+            font-weight: bold;
+            background-color: #E6E6E6;
+        }
+
+        td, th {
+            border: 1px solid black;
+            padding: 3px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="calendar">
+        <table>
+            <tbody>
+                <tr>
+                    <th>пн</th>
+                    <th>вт</th>
+                    <th>ср</th>
+                    <th>чт</th>
+                    <th>пт</th>
+                    <th>сб</th>
+                    <th>вс</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function createCalendar(elem, year, month) {
+            const lastDay = new Date(year, month + 2, 0).getDate();
+            const week = Array(7).fill('<td></td>');
+            let newWeek = [...week];
+            for (let i = 1; i <= lastDay; i++) {
+                const day = new Date(year, month - 1, i).getDay();
+                let ind = day ? day - 1 : 6;
+                newWeek[ind] = `<td>${i}</td>`;
+                if (day === lastDay || !day) {
+                    const tr = document.createElement('tr');
+                    tr.insertAdjacentHTML('afterbegin', newWeek.join(''));
+                    elem.append(tr);
+                    newWeek = [...week];
+                }
+            }
+        }
+
+        const table = document.querySelector('table');
+        const tbody = table.querySelector('tbody');
+
+        createCalendar(tbody, 2012, 9)
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .tree span:hover {
+            font-weight: bold;
+        }
+
+        .tree span {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<ul class="tree" id="tree">
+    <li>Животные
+        <ul>
+            <li>Млекопитающие
+                <ul>
+                    <li>Коровы</li>
+                    <li>Ослы</li>
+                    <li>Собаки</li>
+                    <li>Тигры</li>
+                </ul>
+            </li>
+            <li>Другие
+                <ul>
+                    <li>Змеи</li>
+                    <li>Птицы</li>
+                    <li>Ящерицы</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Рыбы
+        <ul>
+            <li>Аквариумные
+                <ul>
+                    <li>Гуппи</li>
+                    <li>Скалярии</li>
+                </ul>
+            </li>
+            <li>Морские
+                <ul>
+                    <li>Морская форель</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+    <script>
+        const tree = document.getElementById('tree');
+        const allLi = tree.querySelectorAll('li');
+        allLi.forEach(li => {
+            const span = document.createElement('span');
+            li.prepend(span);
+            span.append(span.nextSibling);
+        });
+        tree.addEventListener('click', (event) => {
+            if (event.target.tagName === 'SPAN') {
+                const li = event.target.parentElement;
+                const ul = li.querySelector('ul');
+                if (ul) ul.hidden = !ul.hidden;
+            }
+        });
+    </script>
+</body>
+</html>

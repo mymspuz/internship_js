@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <ol id="elem">
+    <li>Привет</li>
+    <li>Мир</li>
+  </ol>
+
+  <script>
+    function clear(elem) {
+      for (let li of elem.querySelectorAll('li')) {
+        li.remove();
+      }
+    }
+
+    clear(elem);
+  </script>
+</body>
+</html>

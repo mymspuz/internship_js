@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      .hour {
+        color: red
+      }
+
+      .min {
+        color: green
+      }
+
+      .sec {
+        color: blue
+      }
+    </style>
+<body>
+
+    <div id="clock">
+        <span class="hour">hh</span>:<span class="min">mm</span>:<span class="sec">ss</span>
+    </div>
+
+    <button onclick="start()">Start</button>
+    <button onclick="stop()">Stop</button>
+
+    <script>
+        const leadingZero = (src) => src < 10 ? `0${src}` : src.toString();
+        function change() {
+            const date = new Date;
+            spanH.textContent = leadingZero(date.getHours());
+            spanM.textContent = leadingZero(date.getMinutes());
+            spanS.textContent = leadingZero(date.getSeconds());
+        }
+
+        function start() {
+            timer = setInterval(change, 1000);
+            change();
+        }
+
+        function stop() {
+            clearInterval(timer);
+        }
+
+        let timer;
+        const clock = document.getElementById('clock');
+        const spanH = clock.querySelector('.hour');
+        const spanM = clock.querySelector('.min');
+        const spanS = clock.querySelector('.sec');
+    </script>
+</body>
+</html>

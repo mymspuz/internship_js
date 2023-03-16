@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <script>
+    const ul = document.createElement('ul');
+    document.body.append(ul);
+
+    let item = '';
+
+    do {
+      item = prompt('Enter item:', '');
+      if (item) {
+        const newItem = document.createElement('li');
+        newItem.textContent = item;
+        ul.append(newItem);
+      }
+    }
+    while (item);
+
+  </script>
+</body>
+</html>

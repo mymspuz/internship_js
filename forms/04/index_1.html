@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    #modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9000;
+      width: 100%;
+      height: 100%;
+      background-color: gray;
+      opacity: 0.3;
+    }
+    #prompt-form {
+      display: inline-block;
+      padding: 5px 5px 5px 70px;
+      width: 200px;
+      border: 1px solid black;
+      background: white url(https://en.js.cx/clipart/prompt.png) no-repeat left 5px;
+      vertical-align: middle;
+    }
+
+    #prompt-form-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+
+    #prompt-form-container:before {
+      display: inline-block;
+      height: 100%;
+      content: '';
+      vertical-align: middle;
+    }
+
+    #prompt-form input[name="text"] {
+      display: block;
+      margin: 5px;
+      width: 180px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Кликните на кнопку ниже</h2>
+
+<input type="button" value="Кликните, чтобы увидеть форму" id="show-button">
+
+<div id="prompt-form-container" hidden>
+  <form id="prompt-form">
+    <div id="prompt-message">Введите что-нибудь...
+      <br>Пожалуйста..</div>
+    <input name="text" type="text">
+    <input type="submit" value="Ok">
+    <input type="button" name="cancel" value="Отмена">
+  </form>
+</div>
+
+<script>
+  function createModalDiv() {
+    const div = document.createElement('div');
+    div.id = 'modal'
+    document.body.style.overflowY = 'hidden';
+    document.body.append(div);
+  }
+
+  function removeModalDiv() {
+    const div = document.getElementById('modal');
+    div.remove();
+    document.body.style.overflowY = '';
+  }
+
+  function showModal() {
+    createModalDiv();
+    formText.value = '';
+    containerFormPrompt.hidden = false;
+    formText.focus();
+
+    document.onkeydown = (event) => {
+      if (event.key === 'Escape') showResult(null);
+    }
+  }
+
+  function getResult(event) {
+    event.preventDefault();
+    if (formText.value) showResult(formText.value);
+  }
+
+  function showResult(value) {
+    alert(`Вы ввели - ${value}`);
+    removeModalDiv();
+    containerFormPrompt.hidden = true;
+  }
+
+  const btnShow = document.getElementById('show-button');
+  const containerFormPrompt = document.getElementById('prompt-form-container');
+
+  const formPrompt = document.getElementById('prompt-form');
+  const formText = formPrompt.elements.text;
+  const btnCancel = formPrompt.elements.cancel;
+
+  btnShow.addEventListener('click', () => showModal());
+  formPrompt.addEventListener('submit', (event) => getResult(event));
+  formText.addEventListener('keydown', (event) => {
+    if (event.key === 'Tab' && event.shiftKey) {
+      event.preventDefault();
+      btnCancel.focus();
+    }
+  });
+  btnCancel.addEventListener('keydown', (event) => {
+    if (event.key === 'Tab' && !event.shiftKey) {
+      event.preventDefault();
+      formText.focus();
+    }
+  });
+  btnCancel.addEventListener('click', () => showResult(null))
+</script>
+</body>
+
+</html>

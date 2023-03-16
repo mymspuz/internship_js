@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ul {
+            max-width: 470px;
+            list-style: none;
+        }
+        li {
+            padding: 10px 20px;
+            background-color: #edf5e1;
+            border-top: solid 2px #c4df9b;
+            position: relative;
+        }
+        li span {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        li button {
+            position: absolute;
+            top: 4%;
+            left: 90%;
+            background-color: transparent;
+            cursor: pointer;
+            border: none;
+            color: darkred;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>
+            <button>[X]</button>
+            <span>Лошадь</span>
+            <p>Домашняя лошадь — животное семейства непарнокопытных, одомашненный и единственный сохранившийся подвид дикой лошади, вымершей в дикой природе, за исключением небольшой популяции лошади Пржевальского.</p>
+        </li>
+        <li>
+            <button>[X]</button>
+            <span>Осёл</span>
+            <p>Домашний осёл (лат. Equus asinus asinus), или ишак, — одомашненный подвид дикого осла (Equus asinus), сыгравший важную историческую роль в развитии хозяйства и культуры человека и по-прежнему широко в хозяйстве многих развивающихся стран.</p>
+        </li>
+        <li>
+            <button>[X]</button>
+            <span>Кошка</span>
+            <p>Кошка, или домашняя кошка (лат. Felis silvestris catus), — домашнее животное, одно из наиболее популярных(наряду с собакой) «животных-компаньонов». Являясь одиночным охотником на грызунов и других мелких животных, кошка — социальное животное, использующее для общения широкий диапазон звуковых сигналов.</p>
+        </li>
+    </ul>
+<script>
+    const ul = document.querySelector('ul');
+    ul.addEventListener('click', (event) => event.target.parentElement.remove());
+</script>
+</body>
+</html>
